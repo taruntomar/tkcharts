@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script src="./packages/d3.js/d3.v4.min.js"></script>
+        <script src="tkchart.js"></script>
+    </head>
+    <body>
+        <h3>TK Charts</h3>
+        <div id="barChart">
+            <p>Bar Chart</p>
+        </div>
+        <div id="areaChart">
+            <p>Bar Chart</p>
+        </div>
+        <script>
+       
+        
+
+        let data  = [4,2,8,4,3,7,9,9,5];
+    
+        chart = BarChart(d3.select("#barChart"),
+        graphwidth=300,
+        graphheight=200,
+        data=data,
+        showScale=true,
+        showColor=false,
+        border="2px solid gray",
+        background="whitesmoke",
+        padding=20
+    );
+      
+        
+        
+
+            </script>
+    </body>
+</html>
