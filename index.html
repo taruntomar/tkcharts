@@ -2,14 +2,16 @@
     <head>
         <script src="./packages/d3.js/d3.v4.min.js"></script>
         <script src="tkchart.js"></script>
+        <script src="barchart.js"></script>
+        <script src="areachart.js"></script>
     </head>
     <body>
         <h3>TK Charts</h3>
         <div id="barChart">
             <p>Bar Chart</p>
         </div>
-        <div id="areaChart">
-            <p>Bar Chart</p>
+        <div id="areachart">
+            <p>Area Chart</p>
         </div>
         <script>
        
@@ -27,6 +29,8 @@
         background="whitesmoke",
         padding=20
     );
+
+    areaChart(d3.select("#areachart"));
       
         
         
