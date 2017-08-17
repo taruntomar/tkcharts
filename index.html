@@ -4,6 +4,8 @@
         <script src="tkchart.js"></script>
         <script src="barchart.js"></script>
         <script src="areachart.js"></script>
+        <script src="timeseries.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
     </head>
     <body>
         <h3>TK Charts</h3>
@@ -13,24 +15,30 @@
         <div id="areachart">
             <p>Area Chart</p>
         </div>
+        <div id="timeseries">
+            <p>Time Series</p>
+        </div>
         <script>
        
-        
+    //areaChart(d3.select("#areachart"));
+       timeSeries(d3.select("#timeseries"));
 
-        let data  = [4,2,8,4,3,7,9,9,5];
+
+
+    //     let data  = [4,2,8,4,3,7,9,9,5];
     
-        chart = BarChart(d3.select("#barChart"),
-        graphwidth=300,
-        graphheight=200,
-        data=data,
-        showScale=true,
-        showColor=false,
-        border="2px solid gray",
-        background="whitesmoke",
-        padding=20
-    );
+    //     chart = BarChart(d3.select("#barChart"),
+    //     graphwidth=300,
+    //     graphheight=200,
+    //     data=data,
+    //     showScale=true,
+    //     showColor=false,
+    //     border="2px solid gray",
+    //     background="whitesmoke",
+    //     padding=20
+    // );
 
-    areaChart(d3.select("#areachart"));
+    
       
         
         

@@ -1,0 +1,26 @@
+.axiswhite line{
+  stroke: green;
+}
+
+.axiswhite path{
+  stroke: greenyellow;
+}
+
+.axiswhite text{
+  fill: white;
+}  
+
+.grid line {
+  stroke: green;
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+}
+
+.grid path {
+  stroke-width: 0;
+  
+}
+
+.indicator path{
+    opacity: 0.2;
+}

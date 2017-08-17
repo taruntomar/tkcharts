@@ -1,0 +1,48 @@
+var timeSeries = function (parentDiv) {
+
+        // create an svg, with width and margin
+
+        var width = 900, height = 500, margin = { left: 20, right: 20, top: 10, bottom: 20 };
+        var svg = parentDiv.append('svg').attr('width', width)
+                .attr('height', height);
+
+        width = width - margin.left - margin.right;
+        height = height - margin.top - margin.bottom;
+        var g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+        var xscale = d3.scaleTime()
+                .rangeRound([0, width]);
+        var yscale = d3.scaleLinear()
+                .rangeRound([height, 0]);
+        var parseDate = d3.timeParse('%m/%d/%y')
+        area = d3.area()
+                .x(function (d) { return xscale(parseDate(d.time)); })
+                .y1(function (d) { return yscale(d.value); });
+
+
+        // get last 1 week data by default
+        d3.json('/cpufirstdata', function (err, res) {
+                if (err) throw err;
+
+                var maxTime = d3.max(res, function (d) { return parseDate(d.time); });
+                var minTime = d3.timeDay.offset(maxTime, -7);
+                xscale.domain([minTime, maxTime]);
+                yscale.domain([0, d3.max(res, function (d) { return d.value; })]);
+                area.y0(yscale(0));
+                g.append('g')
+                        .attr('transform', 'translate(0,' + height + ')')
+                        .call(d3.axisBottom(xscale));
+                g.append('g')
+                .call(d3.axisLeft(yscale));
+                
+                g.append('path')
+                        .datum(res)
+                        .attr('fill', 'green')
+                        .attr('d', area);
+
+              
+
+        });
+
+
+};
