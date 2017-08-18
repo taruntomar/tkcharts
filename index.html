@@ -22,8 +22,9 @@
         <tr>
             <td>
                 <div id="timeseries">
+                      <p>Time Series</p>
                     <div id='toolbar'></div>
-                    <p>Time Series</p>
+                  
                 </div>
             </td>
             <td valign='top'>
@@ -39,7 +40,7 @@
                 <table frame='box' style='margin-top:10px'>
                     <tr class="optionTable2">
                         <td class="heading">Show Toolbar</td>
-                        <td><input id='showToolbar' type='checkbox' onclick="showtoolbar(this)"></td>
+                        <td><input id='showToolbar' type='checkbox' onclick="showtoolbar(this)" checked></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -61,23 +62,31 @@
             height:500
         }; 
         var timeSeriesgraph = timeSeries(chartOptions);
-        timeSeriesgraph.width = 960;
-        timeSeriesgraph.height = 500;
+       
+        $('#toolbar').attr('class', 'tkgraph-timeseries-toolbar')
+                    .attr('style', 'width:' + (timeSeriesgraph.width ) + ';height:25');
+                d3.select('#toolbar').append("input").attr('id','togglerunbutton').attr('type', 'button').attr('value', 'Stop').attr('style', 'margin:2 0 0 2').attr('onclick', 'stopGraph()');
         var update = function () {
             timeSeriesgraph.options.refreshRate = $('#refreshrate').val();
 
         };
         var showtoolbar = function (cb) {
             if (cb.checked) {
-                $('#toolbar').attr('class', 'tkgraph-timeseries-toolbar')
-                    .attr('style', 'width:' + (timeSeriesgraph.width ) + ';height:25');
-                $('#toolbar').append("input").attr('type', 'button').attr('value', 'Run').attr('style', 'margin:2 0 0 2').attr('onclick', 'toggleRun()');
+                $('#toolbar').show();
             } else {
-                $('#toolbar').remove();
+                $('#toolbar').hide();
             }
         };
-var toggleRun = function(){
+var runGraph = function(){
+        timeSeriesgraph.options.refresh =true;
+        timeSeriesgraph.run();
+        d3.select('#togglerunbutton').property('value','Stop').attr('onclick','stopGraph()');
+};
+    var stopGraph = function(){
         timeSeriesgraph.options.refresh =false;
+        
+        //d3.select('#togglerunbutton').attr('value',null).attr('onclick',null);
+        d3.select('#togglerunbutton').property('value','Run').attr('onclick',"runGraph()");
 };
 
 

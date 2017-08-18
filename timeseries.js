@@ -100,7 +100,7 @@ var timeSeries = function (options) {
 
         });
 
-        var refreshChart = function () {
+        timeserieschart["run"] = function () {
                 d3.json('/telemetrydata', function (err, res) {
                         if (err) throw err;
                         alldata.splice(0, 1);
@@ -152,10 +152,9 @@ var timeSeries = function (options) {
                                         .tickFormat(""))
                 });
                 if(timeserieschart.options.refresh)
-                window.setTimeout(refreshChart, timeserieschart.options.refreshRate);
+                window.setTimeout(timeserieschart.run, timeserieschart.options.refreshRate);
         };
 
-        refreshChart();
-
+        timeserieschart.run();
         return timeserieschart;
 };
