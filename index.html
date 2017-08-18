@@ -1,32 +1,88 @@
 <html>
-    <head>
-        <script src="./packages/d3.js/d3.v4.min.js"></script>
-        <script src="tkchart.js"></script>
-        <script src="barchart.js"></script>
-        <script src="areachart.js"></script>
-        <script src="timeseries.js"></script>
-        <link rel="stylesheet" type="text/css" href="./css/style.css">
-    </head>
-    <body>
-        <h3>TK Charts</h3>
-        <div id="barChart">
+
+<head>
+    <script src='./node_modules/jquery/dist/jquery.min.js'></script>
+    <script src="./packages/d3.js/d3.v4.min.js"></script>
+    <script src="tkchart.js"></script>
+    <script src="barchart.js"></script>
+    <script src="areachart.js"></script>
+    <script src="timeseries.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+
+<body>
+    <h3>TK Charts</h3>
+    <!-- <div id="barChart">
             <p>Bar Chart</p>
         </div>
         <div id="areachart">
             <p>Area Chart</p>
-        </div>
-        <div id="timeseries">
-            <p>Time Series</p>
-        </div>
-        <script>
-       
-    //areaChart(d3.select("#areachart"));
-       timeSeries(d3.select("#timeseries"));
+        </div> -->
+    <table>
+        <tr>
+            <td>
+                <div id="timeseries">
+                    <div id='toolbar'></div>
+                    <p>Time Series</p>
+                </div>
+            </td>
+            <td valign='top'>
+                <table frame='box'>
+                    <tr class="optionTable1">
+                        <td class="heading">Refresh rate</td>
+                        <td><input id='refreshrate' type='text' style="width:50px" value='1000'></td>
+                        <td>ms </td>
+                        <td><button onClick='update()'>Update</button>
+                            <td>
+                    </tr>
+                </table>
+                <table frame='box' style='margin-top:10px'>
+                    <tr class="optionTable2">
+                        <td class="heading">Show Toolbar</td>
+                        <td><input id='showToolbar' type='checkbox' onclick="showtoolbar(this)"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                </td>
+        </tr>
+    </table>
+    <script>
+        //areaChart(d3.select("#areachart"));
+        var chartOptions ={
+            divid:'#timeseries',
+            width:960,
+            height:500
+        }; 
+        var timeSeriesgraph = timeSeries(chartOptions);
+        timeSeriesgraph.width = 960;
+        timeSeriesgraph.height = 500;
+        var update = function () {
+            timeSeriesgraph.options.refreshRate = $('#refreshrate').val();
 
+        };
+        var showtoolbar = function (cb) {
+            if (cb.checked) {
+                $('#toolbar').attr('class', 'tkgraph-timeseries-toolbar')
+                    .attr('style', 'width:' + (timeSeriesgraph.width ) + ';height:25');
+                $('#toolbar').append("input").attr('type', 'button').attr('value', 'Run').attr('style', 'margin:2 0 0 2').attr('onclick', 'toggleRun()');
+            } else {
+                $('#toolbar').remove();
+            }
+        };
+var toggleRun = function(){
+        timeSeriesgraph.options.refresh =false;
+};
 
 
     //     let data  = [4,2,8,4,3,7,9,9,5];
-    
+
     //     chart = BarChart(d3.select("#barChart"),
     //     graphwidth=300,
     //     graphheight=200,
@@ -37,12 +93,7 @@
     //     background="whitesmoke",
     //     padding=20
     // );
+    </script>
+</body>
 
-    
-      
-        
-        
-
-            </script>
-    </body>
 </html>

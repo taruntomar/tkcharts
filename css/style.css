@@ -24,3 +24,9 @@
 .indicator path{
     opacity: 0.2;
 }
+
+
+.tkgraph-timeseries-toolbar{
+
+    background-color: slategray
+}
